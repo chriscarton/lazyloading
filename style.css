@@ -1,0 +1,50 @@
+@media screen and (min-width: 600px){
+	.container{
+		width:75%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.grid{
+	border:5px dashed tomato;
+	display:grid;
+	grid-template-areas: 
+		'area1  area2  area3'
+		'area4  area5  area3'
+		'area6  area6  area7'
+		'area8  area9  area9'
+		'area10 area10 area10'
+	;
+}
+
+
+img{
+	width:100%;
+	height:100%;
+	object-fit: cover;
+	object-position: center center;	
+}
+img.original{
+	display:none;
+	opacity:0;
+	transition:all 5s;
+}
+img.original.is-loaded{
+	opacity:0;
+	animation-name:isLoaded;
+	animation-duration:2s;
+	animation-delay:0.5s;
+	animation-fill-mode: forwards;
+}
+@keyframes isLoaded{
+	from{
+		opacity:0;
+	}
+	to{
+		opacity:1;
+	}
+}
+img.placeholder{
+	filter:blur(10px);
+}

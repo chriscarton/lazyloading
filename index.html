@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Lazyloading</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Lazyloading</h1>
+
+		<p>
+			Cette technique permet de n'afficher les images originales une fois que celles-ci sont <b>toutes</b> chargées. En attendant, ce sont des images compressées à partir des originales qui seront affichées avec un petit <code>filter:blur</code>.
+		</p>
+
+		<p>
+			Une fois qu'une image est chargée, on masque l'image de remplacement / d'attente basse définition (<code>display:none</code>) et on affiche l'originale (<code>display:block</code>).
+		</p>
+
+		<p>
+			Néanmoins la nouvelle image n'est pas encore chargée. Et c'est normal, car elle a une <code>opacity:0</code>. Ce n'est qu'une fois qu'elles sont toutes chargées (on s'en assure grace à une comparaison entre l'index de la boucle et le nombre d'images) qu'on lui ajoute la classe <code>.is-loaded</code> et la propriété de style <code>animationDuration:index*0.25+'s'</code>. 
+		</p>
+
+		<p>Ainsi les images de cette grille s'affichent : </p>
+
+		<ul>
+			<li>Dans l'ordre.</li>
+			<li>Une fois qu'elles sont toutes chargées.</li>
+			<li>Avec une animation.</li>
+		</ul>
+
+		<div class="grid">
+			<div style="grid-area:area1;">
+				<img 
+					class="original"
+					src="image.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area2;">
+				<img 
+					class="original"
+					src="image2.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image2.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area3;">
+				<img 
+					class="original"
+					src="image3.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image3.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area4;">
+				<img 
+					class="original"
+					src="image4.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image4.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area5;">
+				<img 
+					class="original"
+					src="image5.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image5.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area6;">
+				<img 
+					class="original"
+					src="image6.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image6.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area7;">
+				<img 
+					class="original"
+					src="image7.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image7.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area8;">
+				<img 
+					class="original"
+					src="image8.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image8.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area9;">
+				<img 
+					class="original"
+					src="image9.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image9.jpeg" alt=""
+				>
+			</div>
+			<div style="grid-area:area10;">
+				<img 
+					class="original"
+					src="image10.jpeg" alt=""
+					
+				>
+				<img 
+					class="placeholder"
+					src="Resized/image10.jpeg" alt=""
+				>
+			</div>
+		</div>
+
+		
+	</div>
+	<script>
+		let original_images = document.querySelectorAll('.original');
+		
+		console.log(original_images.length);		
+
+
+
+		original_images.forEach(function(image,index){
+			image.addEventListener('load', function(e){
+
+				let original = e.target;
+				let placeholder = e.target.nextElementSibling;
+				
+				placeholder.style.display="none";
+				original.style.display="block";
+
+				//Si toutes les images sont chargées
+				//On lance l'animation...
+
+				if(index===original_images.length-1){
+					original_images.forEach(function(image,index){
+						image.style.animationDelay = index*0.25+'s';
+						image.classList.add('is-loaded');
+					});
+				}
+
+			});
+		});
+	</script>
+</body>
+</html>
