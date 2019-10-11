@@ -7,27 +7,39 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Lazyloading</h1>
+		<h1>Lazyloading <small>(branche single-loaded)</small></h1>
 
 		<p>
 			Cette technique permet de n'afficher les images originales une fois que celles-ci sont <b>toutes</b> chargées. En attendant, ce sont des images compressées à partir des originales qui seront affichées avec un petit <code>filter:blur</code>.
 		</p>
 
 		<p>
-			Une fois qu'une image est chargée, on masque l'image de remplacement / d'attente basse définition (<code>display:none</code>) et on affiche l'originale (<code>display:block</code>).
+			Une fois qu'une image est chargée, on masque l'image de remplacement / d'attente basse définition (<code>display:none</code>) et on affiche l'originale (<code>display:block</code> et ajout de la classe <code>.is-loaded</code> qui contient une animation sur l'opacité).
 		</p>
 
-		<p>
-			Néanmoins la nouvelle image n'est pas encore chargée. Et c'est normal, car elle a une <code>opacity:0</code>. Ce n'est qu'une fois qu'elles sont toutes chargées (on s'en assure grace à une comparaison entre l'index de la boucle et le nombre d'images) qu'on lui ajoute la classe <code>.is-loaded</code> et la propriété de style <code>animationDuration:index*0.25+'s'</code>. 
-		</p>
+		<pre>
+			<code>
+window.addEventListener('DOMContentLoaded', function (e) {
 
-		<p>Ainsi les images de cette grille s'affichent : </p>
+	let original_images = document.querySelectorAll('.original');
+	
+	original_images.forEach(function(image,index){
+		image.addEventListener('load', function(e){
 
-		<ul>
-			<li>Dans l'ordre.</li>
-			<li>Une fois qu'elles sont toutes chargées.</li>
-			<li>Avec une animation.</li>
-		</ul>
+			let original = e.target;
+			let placeholder = e.target.nextElementSibling;
+			
+			placeholder.style.display="none";
+			original.style.display="block";
+
+			original.classList.add('is-loaded');
+
+		});
+	});
+});
+			</code>
+		</pre>
+
 
 		<div class="grid">
 			<div style="grid-area:area1;">
@@ -145,32 +157,24 @@
 		
 	</div>
 	<script>
-		let original_images = document.querySelectorAll('.original');
-		
-		console.log(original_images.length);		
+		window.addEventListener('DOMContentLoaded', function (e) {
 
+			let original_images = document.querySelectorAll('.original');
+			
+			original_images.forEach(function(image,index){
+				image.addEventListener('load', function(e){
 
+					let original = e.target;
+					let placeholder = e.target.nextElementSibling;
+					
+					placeholder.style.display="none";
+					original.style.display="block";
 
-		original_images.forEach(function(image,index){
-			image.addEventListener('load', function(e){
+					original.classList.add('is-loaded');
 
-				let original = e.target;
-				let placeholder = e.target.nextElementSibling;
-				
-				placeholder.style.display="none";
-				original.style.display="block";
-
-				//Si toutes les images sont chargées
-				//On lance l'animation...
-
-				if(index===original_images.length-1){
-					original_images.forEach(function(image,index){
-						image.style.animationDelay = index*0.25+'s';
-						image.classList.add('is-loaded');
-					});
-				}
-
+				});
 			});
+
 		});
 	</script>
 </body>

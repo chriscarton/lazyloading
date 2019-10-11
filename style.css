@@ -18,6 +18,17 @@
 	;
 }
 
+code{
+	font-family: monospace;
+	background-color:black;
+	color:white;
+	border-radius:5px;
+}
+
+pre code{
+	display:block;
+	padding:15px;
+}
 
 img{
 	width:100%;
