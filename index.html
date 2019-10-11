@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Lazyloading</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="loader.css">
+	<script src="script.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -154,28 +156,19 @@ window.addEventListener('DOMContentLoaded', function (e) {
 			</div>
 		</div>
 
+		<div class="base-loader">
+			<div class="lds-roller">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
 		
 	</div>
-	<script>
-		window.addEventListener('DOMContentLoaded', function (e) {
-
-			let original_images = document.querySelectorAll('.original');
-			
-			original_images.forEach(function(image,index){
-				image.addEventListener('load', function(e){
-
-					let original = e.target;
-					let placeholder = e.target.nextElementSibling;
-					
-					placeholder.style.display="none";
-					original.style.display="block";
-
-					original.classList.add('is-loaded');
-
-				});
-			});
-
-		});
-	</script>
 </body>
 </html>

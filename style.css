@@ -18,6 +18,10 @@
 	;
 }
 
+.grid > div{
+	position:relative;
+}
+
 code{
 	font-family: monospace;
 	background-color:black;
