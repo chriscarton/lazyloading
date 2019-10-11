@@ -39,13 +39,11 @@ img{
 img.original{
 	display:none;
 	opacity:0;
-	transition:all 5s;
 }
 img.original.is-loaded{
 	opacity:0;
 	animation-name:isLoaded;
-	animation-duration:2s;
-	animation-delay:0.5s;
+	animation-duration:1s;
 	animation-fill-mode: forwards;
 }
 @keyframes isLoaded{
