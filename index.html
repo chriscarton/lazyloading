@@ -12,7 +12,7 @@
 		<h1>Lazyloading</h1>
 
 		<p>
-			Cette technique permet de n'afficher les images originales une fois que celles-ci sont <b>toutes</b> chargées. En attendant, ce sont des images compressées à partir des originales qui seront affichées avec un petit <code>filter:blur</code>.
+			Cette technique permet de n'afficher les images originales une fois que celles-ci sont chargées. En attendant, ce sont des images compressées à partir des originales qui seront affichées avec un petit <code>filter:blur</code>.
 		</p>
 
 		<p>
@@ -42,6 +42,16 @@ window.addEventListener('DOMContentLoaded', function (e) {
 			</code>
 		</pre>
 
+		<p>
+			Pour créer les images en basse définition à partir d'un dossier d'image faire en CLI :
+		</p>
+		
+		<pre>
+			<code>
+mkdir Resized
+mogrify -path Resized -adaptive-resize 100% -quality 1% *.jpeg
+			</code>
+		</pre>
 
 		<div class="grid">
 			<div style="grid-area:area1;">
